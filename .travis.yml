@@ -17,4 +17,4 @@ deploy:
   provider: script
   script: ./Publish.sh
   on:
-    tags: true
+    tags: master
