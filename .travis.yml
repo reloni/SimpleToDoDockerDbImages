@@ -13,5 +13,5 @@ env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
 
-after_success:
+script:
   - Publish.sh
