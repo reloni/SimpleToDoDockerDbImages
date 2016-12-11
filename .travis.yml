@@ -14,4 +14,4 @@ env:
     - COMMIT=${TRAVIS_COMMIT::8}
 
 script:
-  - Publish.sh
+  ./Publish.sh
