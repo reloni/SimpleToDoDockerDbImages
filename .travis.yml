@@ -13,8 +13,6 @@ env:
   global:
     - DBVersion=9.6.1
 
-deploy:
-  provider: script
-  script: ./Publish.sh
-  on:
-    tags: master
+script:
+  - echo $TRAVIS_TAG
+  ./Publish.sh $TRAVIS_TAG $DOCKER_USER $DOCKER_PASS $DBVersion
