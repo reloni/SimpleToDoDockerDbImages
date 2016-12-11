@@ -11,7 +11,7 @@ branches:
 
 env:
   global:
-    - COMMIT=${TRAVIS_COMMIT::8}
+    - DBVersion=9.6.1
 
 deploy:
   provider: script
