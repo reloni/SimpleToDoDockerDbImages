@@ -5,10 +5,6 @@ services:
 
 language: generic
 
-branches:
-  only:
-  - master
-
 env:
   global:
     - DBVersion=9.6.1
