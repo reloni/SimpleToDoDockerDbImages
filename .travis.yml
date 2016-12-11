@@ -13,5 +13,10 @@ env:
   global:
     - COMMIT=${TRAVIS_COMMIT::8}
 
-script:
-  ./Publish.sh
+deploy:
+  provider: script
+  script: ./Publish.sh
+  on:
+    tags: true
+#script:
+#  ./Publish.sh
