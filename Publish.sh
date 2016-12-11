@@ -2,7 +2,7 @@
 
 set -ev
 
-if [ $TRAVIS_TAG != "" ]; then
+if [ "$TRAVIS_TAG" != "" ]; then
 docker login -u $DOCKER_USER -p $DOCKER_PASS
 export REPO=reloni/todo-todopostgres
 export TAG=empty-$TRAVIS_TAG
