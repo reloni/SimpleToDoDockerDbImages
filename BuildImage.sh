@@ -1,1 +1,1 @@
-docker build -f Dockerfile.empty -t todo-postgres-6.3.1-empty .
+docker build -f Dockerfile.empty -t reloni/todo-postgres:empty-0.0.1 --label Postgres=9.6.1 .

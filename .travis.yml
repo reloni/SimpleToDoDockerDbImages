@@ -1,0 +1,17 @@
+sudo: required
+
+services:
+  - docker
+
+language: csharp
+
+branches:
+  only:
+  - master
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
+
+after_success:
+  - Publish.sh
