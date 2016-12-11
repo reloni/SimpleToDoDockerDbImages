@@ -7,6 +7,8 @@ dbversion=$4
 
 set -ev
 
+echo $travistag
+
 if [ "$travistag" != "" ]; then
 docker login -u $user -p $pass
 export REPO=reloni/todo-todopostgres
