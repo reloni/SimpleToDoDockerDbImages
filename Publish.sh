@@ -1,9 +1,9 @@
 #!/bin/bash
 
-travistag=$1
-user=$2
-pass=$3
-dbversion=$4
+travistag=$0
+user=$1
+pass=$2
+dbversion=$3
 
 set -ev
 
