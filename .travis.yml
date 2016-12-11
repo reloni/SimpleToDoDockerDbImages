@@ -14,5 +14,4 @@ env:
     - DBVersion=9.6.1
 
 script:
-  - echo $TRAVIS_TAG
   ./Publish.sh $TRAVIS_TAG $DOCKER_USER $DOCKER_PASS $DBVersion
