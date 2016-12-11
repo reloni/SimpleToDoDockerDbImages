@@ -14,6 +14,4 @@ env:
     - DBVersion=9.6.1
 
 script:
-  - 'if [ "$TRAVIS_TAG" != "" ]; then
-  ./Publish.sh $TRAVIS_TAG $DOCKER_USER $DOCKER_PASS $DBVersion
-  fi'
+  ./Publish.sh
