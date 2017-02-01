@@ -8,7 +8,8 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   export TAG=empty-${TRAVIS_TAG}
   docker build -f Dockerfile.empty -t $REPO:$TAG --label Postgres=${DBVersion} .
   docker tag $REPO:$TAG $REPO:latest
-  docker push $REPO
+  docker push $REPO > PushLog.log
+  cat PushLog.log
 fi
 
 exit 0;
