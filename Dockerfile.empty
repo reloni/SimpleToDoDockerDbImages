@@ -1,3 +1,8 @@
 FROM postgres:9.6.1
 
 COPY ./DbScripts /docker-entrypoint-initdb.d
+
+COPY secrets-entrypoint.sh /secrets-entrypoint.sh
+
+ENTRYPOINT ["/secrets-entrypoint.sh"]
+CMD ["postgres"]
