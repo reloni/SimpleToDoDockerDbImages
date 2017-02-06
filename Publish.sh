@@ -1,6 +1,9 @@
 #!/bin/bash
 
-set -ev
+set -e
+
+aws ecr get-login --region eu-central-1 > login
+eval "$(cat login)"
 
 if [ "${TRAVIS_TAG}" != "" ]; then
   #push to AWS
