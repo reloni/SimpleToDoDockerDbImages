@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ev
+set -e
 
 if [ "${TRAVIS_TAG}" != "" ]; then
   #push to AWS
