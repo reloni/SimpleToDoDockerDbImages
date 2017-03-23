@@ -1,11 +1,13 @@
 CREATE TABLE TaskUser (
 UUID UUID PRIMARY KEY,
+FirebaseId varchar(50) NOT NULL UNIQUE,
 CreationDate timestamptz NOT NULL,
-FirstName varchar(255) NOT NULL,
-LastName varchar(255) NOT NULL,
-Email varchar(255) unique NOT NULL,
-Password varchar(255) NOT NULL
+FirstName varchar(255),
+LastName varchar(255),
+Email varchar(255) unique NOT NULL
 );
+
+CREATE UNIQUE INDEX FirebaseIdIndex ON TaskUser (FirebaseId);
 
 CREATE TABLE Task (
 UUID UUID PRIMARY KEY,
