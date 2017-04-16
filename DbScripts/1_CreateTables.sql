@@ -16,5 +16,6 @@ Description varchar(255) NOT NULL,
 Notes varchar(4000),
 CreationDate timestamptz NOT NULL,
 TargetDate timestamptz,
+TargetDateIncludeTime BOOL NOT NULL,
 Owner UUID REFERENCES TaskUser (UUID) ON DELETE CASCADE
 );
