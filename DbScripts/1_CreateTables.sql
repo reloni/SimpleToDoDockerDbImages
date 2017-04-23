@@ -4,10 +4,10 @@ FirebaseId varchar(50) NOT NULL UNIQUE,
 CreationDate timestamptz NOT NULL,
 FirstName varchar(255),
 LastName varchar(255),
-Email varchar(255) unique NOT NULL
+Email varchar(255) NOT NULL
 );
 
-CREATE UNIQUE INDEX FirebaseIdIndex ON TaskUser (FirebaseId);
+CREATE INDEX FirebaseId_Email_Index ON TaskUser (FirebaseId, Email);
 
 CREATE TABLE Task (
 UUID UUID PRIMARY KEY,
