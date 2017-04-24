@@ -19,3 +19,13 @@ TargetDate timestamptz,
 TargetDateIncludeTime BOOL NOT NULL,
 Owner UUID REFERENCES TaskUser (UUID) ON DELETE CASCADE
 );
+
+CREATE TABLE PushNotification
+(
+UUID UUID PRIMARY KEY,
+ServiceId UUID NOT NULL,
+TaskId UUID REFERENCES TaskUser (UUID) ON DELETE CASCADE,
+UserId UUID REFERENCES Task (UUID) ON DELETE CASCADE
+);
+
+CREATE INDEX PushNotification_ServiceId ON PushNotification (ServiceId);
