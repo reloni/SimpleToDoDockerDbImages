@@ -17,15 +17,16 @@ Notes varchar(4000),
 CreationDate timestamptz NOT NULL,
 TargetDate timestamptz,
 TargetDateIncludeTime BOOL NOT NULL,
-Owner UUID REFERENCES TaskUser (UUID) ON DELETE CASCADE
+Owner UUID NOT NULL REFERENCES TaskUser (UUID) ON DELETE CASCADE
 );
 
 CREATE TABLE PushNotification
 (
 UUID UUID PRIMARY KEY,
 ServiceId UUID NOT NULL,
-TaskId UUID REFERENCES TaskUser (UUID) ON DELETE CASCADE,
-UserId UUID REFERENCES Task (UUID) ON DELETE CASCADE
+TaskId UUID NOT NULL REFERENCES Task (UUID) ON DELETE CASCADE,
+UserId UUID NOT NULL REFERENCES TaskUser (UUID) ON DELETE CASCADE,
+DueDate timestamptz NOT NULL
 );
 
 CREATE INDEX PushNotification_ServiceId ON PushNotification (ServiceId);
