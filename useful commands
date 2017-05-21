@@ -1,0 +1,12 @@
+docker build -f Dockerfile.empty -t auto-restore .
+
+docker run --name pgs -p 5432:5432 -e POSTGRES_PASSWORD=psw -d auto-restore
+
+docker run --name pgs -p 5432:5432 -v /Users/AntonEfimenko/mac_pgdata:/custompgdata -v /Users/AntonEfimenko/pgdata_back:/pgdata_back -e POSTGRES_PASSWORD=psw -e PGDATA=/custompgdata -d auto-restore
+
+
+#dump db
+pg_dump --clean --dbname=postgresql://postgres:psw@127.0.0.1:5432/postgres | gzip > ./$(date +%Y-%m-%d-%H:%M).psql.gz
+
+#restore db
+gunzip -c latest.psql.gz | psql --dbname=postgresql://postgres:psw@127.0.0.1:5432/postgres
