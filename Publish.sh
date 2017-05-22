@@ -6,7 +6,7 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   if [ "${TRAVIS_BRANCH}" = "master" ]; then
     export SUBTAG=release
   else
-    export SUBTAG=${TRAVIS_BRANCH}
+    export SUBTAG=develop
   fi
 
   export REPO=${DOCKER_AWS_REPONAME}
