@@ -3,12 +3,19 @@
 set -e
 
 if [ "${TRAVIS_TAG}" != "" ]; then
+  if [ "${TRAVIS_BRANCH}" = "master" ]; then
+    export SUBTAG=release
+  else
+    export SUBTAG=${TRAVIS_BRANCH}
+  fi
+
+  export REPO=${DOCKER_AWS_REPONAME}
+  export TAG=${TRAVIS_TAG}-${DBVersion}-$SUBTAG
+
   #push to AWS
   aws ecr get-login --region eu-central-1 > login
   eval "$(cat login)"
-  export REPO=${DOCKER_AWS_REPONAME}
-  export TAG=empty-${TRAVIS_TAG}
-  docker build -f Dockerfile.empty -t $REPO:$TAG --label Postgres=${DBVersion} .
+  docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
   docker tag $REPO:$TAG $REPO:latest
   docker push $REPO > PushLog.log
   echo "AWS push log ===="
@@ -18,7 +25,7 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   #push to docker-hub
   docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
   export REPO=reloni/todo-postgres
-  docker build -f Dockerfile.empty -t $REPO:$TAG --label Postgres=${DBVersion} .
+  docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
   docker tag $REPO:$TAG $REPO:latest
   docker push $REPO > PushLog.log
   echo "Docker hub push log ===="

@@ -9,9 +9,6 @@ RUN apt-get update && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
     rm awscli-bundle.zip && rm -rf awscli-bundle
 
-COPY ./DbScripts /docker-entrypoint-initdb.d
-
 COPY secrets-entrypoint.sh /secrets-entrypoint.sh
 
 ENTRYPOINT ["/secrets-entrypoint.sh"]
-CMD ["postgres"]
