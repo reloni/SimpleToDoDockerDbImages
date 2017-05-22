@@ -3,7 +3,8 @@
 set -e
 
 if [ "${TRAVIS_TAG}" != "" ]; then
-  if [ "${TRAVIS_BRANCH}" = "master" ]; then
+  # if tag doesn't contain word "beta" it's release build
+  if [[ "$TRAVIS_TAG" != *"beta"* ]]; then
     export SUBTAG=release
   else
     export SUBTAG=develop
@@ -16,7 +17,7 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   aws ecr get-login --region eu-central-1 > login
   eval "$(cat login)"
   docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
-  if [ "${TRAVIS_BRANCH}" = "master" ]; then
+  if [ "$SUBTAG" = "release" ]; then
     docker tag $REPO:$TAG $REPO:latest
   fi
   docker push $REPO > PushLog.log
@@ -28,7 +29,7 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
   export REPO=reloni/todo-postgres
   docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
-  if [ "${TRAVIS_BRANCH}" = "master" ]; then
+  if [ "$SUBTAG" = "release" ]; then
     docker tag $REPO:$TAG $REPO:latest
   fi
   docker push $REPO > PushLog.log
