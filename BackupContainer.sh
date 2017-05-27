@@ -1,0 +1,1 @@
+pg_dump --clean --dbname=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@$localhost:5432/${POSTGRES_DB} 2> /${BACKUP_FOLDER}/$(date +%Y-%m-%d-%H:%M).log | gzip > /${BACKUP_FOLDER}/$(date +%Y-%m-%d-%H:%M).psql.gz
