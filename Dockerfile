@@ -12,3 +12,4 @@ RUN apt-get update && \
 COPY secrets-entrypoint.sh /secrets-entrypoint.sh
 
 ENTRYPOINT ["/secrets-entrypoint.sh"]
+CMD ["postgres"]
