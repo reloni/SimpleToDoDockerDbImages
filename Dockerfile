@@ -10,6 +10,8 @@ RUN apt-get update && \
     rm awscli-bundle.zip && rm -rf awscli-bundle
 
 COPY secrets-entrypoint.sh /secrets-entrypoint.sh
+COPY BackupContainer.sh /BackupContainer.sh
+RUN chmod +x /BackupContainer.sh
 
 ENTRYPOINT ["/secrets-entrypoint.sh"]
 CMD ["postgres"]
