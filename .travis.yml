@@ -9,6 +9,10 @@ before_install:
   - pip install --user awscli
   - export PATH=$PATH:$HOME/.local/bin
 
+before_script:
+  - docker --version
+  - aws --version
+
 env:
   global:
     - DBVersion=9.6.1
