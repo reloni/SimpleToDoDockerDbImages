@@ -5,7 +5,7 @@ mkdir -p $BACKUP_FOLDER
 
 FOLDER=$(date +%Y-%m)
 FILEDATE=$(date +%Y-%m-%d-%H:%M)
-#pg_dump --clean --dbname=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB} 2> /${BACKUP_FOLDER}/$FILEDATE.log | gzip > /${BACKUP_FOLDER}/$FILEDATE.psql.gz
+
 pg_dump --clean --dbname=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB} > temp.psql 2> /$BACKUP_FOLDER/$FILEDATE.log && \
   gzip < temp.psql > ${BACKUP_FOLDER}/$FILEDATE.psql.gz && \
   aws sns publish --topic-arn ${SNS_TOPIC} --message "Backup on $FILEDATE completed" || \
@@ -22,5 +22,3 @@ if [ "$LOAD_S3_SECRETS" = "YES" ]; then
   rm /$BACKUP_FOLDER/$FILEDATE.log
   rm /$BACKUP_FOLDER/$FILEDATE.psql.gz
 fi
-
-#docker run -it --name pgs3 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=test -e POSTGRES_HOST=localhost -e POSTGRES_PORT=5432 -e POSTGRES_DB=postgres  -e BACKUP_FOLDER=/backups -e AWS_DEFAULT_REGION=eu-central-1 -p 5432:5432 db-test
