@@ -14,7 +14,7 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   export TAG=${TRAVIS_TAG}-${DBVersion}-$SUBTAG
 
   #push to AWS
-  aws ecr get-login --region eu-central-1 > login
+  aws ecr get-login --no-include-email --region eu-central-1 > login
   eval "$(cat login)"
   docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
   if [ "$SUBTAG" = "release" ]; then
