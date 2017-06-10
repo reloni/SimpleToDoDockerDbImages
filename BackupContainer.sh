@@ -18,11 +18,11 @@ pg_dump --clean --dbname=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${PO
 
 if [ "$LOAD_S3_SECRETS" = "YES" ]; then
   #upload backups to S3
-  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.log s3://${BACKUPS_BUCKET_NAME}/$FOLDER/$FILEDATE.log
-  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.psql.gz s3://${BACKUPS_BUCKET_NAME}/$FOLDER/$FILEDATE.psql.gz
+  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.log s3://${BACKUPS_BUCKET_NAME}/$FOLDER/$FILEDATE.log --sse
+  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.psql.gz s3://${BACKUPS_BUCKET_NAME}/$FOLDER/$FILEDATE.psql.gz --sse
 
-  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.log s3://${BACKUPS_BUCKET_NAME}/latest.log
-  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.psql.gz s3://${BACKUPS_BUCKET_NAME}/latest.psql.gz
+  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.log s3://${BACKUPS_BUCKET_NAME}/latest.log --sse
+  aws s3 --region ${SECRETS_BUCKET_REGION} cp /$BACKUP_FOLDER/$FILEDATE.psql.gz s3://${BACKUPS_BUCKET_NAME}/latest.psql.gz --sse
 
   rm /$BACKUP_FOLDER/$FILEDATE.log
   rm /$BACKUP_FOLDER/$FILEDATE.psql.gz
