@@ -19,6 +19,8 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
   if [ "$SUBTAG" = "release" ]; then
     docker tag $REPO:$TAG $REPO:latest
+  else
+    docker tag $REPO:$TAG $REPO:dev-latest
   fi
   docker push $REPO > PushLog.log
   echo "AWS push log ===="
@@ -31,6 +33,8 @@ if [ "${TRAVIS_TAG}" != "" ]; then
   docker build -f Dockerfile -t $REPO:$TAG --label Postgres=${DBVersion} .
   if [ "$SUBTAG" = "release" ]; then
     docker tag $REPO:$TAG $REPO:latest
+  else
+    docker tag $REPO:$TAG $REPO:dev-latest
   fi
   docker push $REPO > PushLog.log
   echo "Docker hub push log ===="
