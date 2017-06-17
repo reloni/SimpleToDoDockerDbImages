@@ -9,6 +9,7 @@ RUN apt-get update && \
     ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws && \
     rm awscli-bundle.zip && rm -rf awscli-bundle
 
+COPY ./DBVersion.sql /docker-entrypoint-initdb.d
 COPY secrets-entrypoint.sh /secrets-entrypoint.sh
 COPY BackupContainer.sh /BackupContainer.sh
 RUN chmod +x /BackupContainer.sh
